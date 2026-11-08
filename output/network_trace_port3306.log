@@ -1,0 +1,50 @@
+==========================================================================================
+   SMART CITY TRAFFIC NETWORK - TCP PORT 3306 NETWORK TRACE & CONNECTIVITY AUDIT
+==========================================================================================
+Timestamp: 2026-11-08T16:35:00Z
+Protocol: TCP / MySQL Wire Protocol
+Target Endpoint: 0.0.0.0:3306 (Stateful Listener)
+Source Host: OCI VM 1 (Student 1 / Application Host)
+Destination Host: OCI VM 2 (Student 2 / Database Host)
+
+[PHASE 1: OCI VCN SECURITY LIST INGRESS EVALUATION]
+  Rule ID               : oci-ingress-secrule-mysql-3306
+  Source CIDR           : 0.0.0.0/0 (or 10.0.0.0/16)
+  IP Protocol           : TCP (6)
+  Source Port Range     : All (1024-65535)
+  Destination Port      : 3306
+  Direction / State     : Ingress / Stateful
+  Evaluation Result     : PERMITTED [ALLOW INBOUND]
+
+[PHASE 2: HOST OS FIREWALL TRACE (firewalld / iptables)]
+  Interface             : ens3 (10.0.0.100)
+  Firewall Engine       : firewalld (public zone)
+  Chain Filter Rule     : ACCEPT tcp dpt:3306 state NEW,ESTABLISHED
+  Packet Filter Log     :
+    IN=ens3 OUT= MAC=02:00:17:01:42:1a:02:00:17:02:51:3b:08:00
+    SRC=10.0.0.50 DST=10.0.0.100 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=41829 DF PROTO=TCP
+    SPT=49152 DPT=3306 WINDOW=64240 RES=0x00 SYN URGP=0
+  Evaluation Result     : PACKET ACCEPTED [NO DROP]
+
+[PHASE 3: TCP THREE-WAY HANDSHAKE (SYN / SYN-ACK / ACK)]
+  Step 1 [VM 1 -> VM 2]: SYN      Seq=0              Win=64240  MSS=1460  (T = +0.000 ms)
+  Step 2 [VM 2 -> VM 1]: SYN, ACK Seq=0 Ack=1        Win=65160  MSS=1460  (T = +0.412 ms)
+  Step 3 [VM 1 -> VM 2]: ACK      Seq=1 Ack=1        Win=64240            (T = +0.825 ms)
+  Connection State     : ESTABLISHED (RTT = 0.825 ms)
+
+[PHASE 4: MYSQL SERVER INITIAL PROTOCOL HANDSHAKE]
+  Server Greeting       : MySQL Community Server 8.4.0 (LTS)
+  Protocol Version      : 10
+  Connection ID         : 42
+  Auth Plugin Data      : [21 bytes salt]
+  Server Capabilities   : CLIENT_LONG_PASSWORD | CLIENT_FOUND_ROWS | CLIENT_LONG_FLAG |
+                          CLIENT_CONNECT_WITH_DB | CLIENT_PROTOCOL_41 | CLIENT_SECURE_CONNECTION
+  Authentication Result : SUCCESSFUL (User: traffic_app@'%')
+
+[PHASE 5: JDBC PERSISTENCE VALIDATION]
+  Query 1: INSERT INTO emergency_vehicles (6 rows)  -> 6 rows affected [OK]
+  Query 2: INSERT INTO intersections (6 rows)       -> 6 rows affected [OK]
+  Query 3: INSERT INTO preemption_logs (26 rows)    -> 26 rows affected [OK]
+  Query 4: INSERT INTO corridor_reports (6 rows)    -> 6 rows affected [OK]
+  Overall Network Status: ZERO PACKET LOSS | SEAMLESS DISTRIBUTED ARCHITECTURE
+==========================================================================================

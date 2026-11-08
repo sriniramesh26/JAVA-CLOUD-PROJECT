@@ -1,0 +1,3 @@
+Main-Class: com.smarttraffic.MainApp
+Class-Path: lib/mysql-connector-j-8.4.0.jar
+

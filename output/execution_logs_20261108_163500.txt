@@ -1,0 +1,36 @@
+==========================================================================================
+       SMART CITY TRAFFIC ENGINE - SIGNAL PREEMPTION EXECUTION TRACE LOGS                 
+       Generated: 2026-11-08T16:35:00.124856
+==========================================================================================
+
+LOG ID | VEHICLE  | INTERSEC | ETA(MIN) | FROM   -> TO     | OVERRIDE  | STATUS | THREAD           | DELAY(S)
+--------------------------------------------------------------------------------------------------
+1      | EV-101   | INT-01   |     1.40 | RED    -> GREEN  | TRIGGERED | SUCCESS| CorridorWorker-01 | 5s
+2      | EV-101   | INT-02   |     1.40 | RED    -> GREEN  | NO_ACTION | BYPASSED| CorridorWorker-02 | 2s
+3      | EV-101   | INT-03   |     1.40 | RED    -> GREEN  | TRIGGERED | SUCCESS| CorridorWorker-03 | 6s
+4      | EV-101   | INT-04   |     1.40 | RED    -> GREEN  | NO_ACTION | BYPASSED| CorridorWorker-04 | 2s
+5      | EV-101   | INT-05   |     1.40 | RED    -> GREEN  | TRIGGERED | SUCCESS| CorridorWorker-01 | 5s
+6      | EV-101   | INT-06   |     1.40 | RED    -> GREEN  | NO_ACTION | BYPASSED| CorridorWorker-02 | 2s
+7      | EV-102   | INT-01   |     2.00 | RED    -> RED    | NO_ACTION | BYPASSED| CorridorWorker-03 | 10s
+8      | EV-102   | INT-02   |     2.00 | RED    -> RED    | NO_ACTION | BYPASSED| CorridorWorker-04 | 8s
+9      | EV-102   | INT-03   |     2.00 | RED    -> RED    | NO_ACTION | BYPASSED| CorridorWorker-01 | 12s
+10     | EV-102   | INT-04   |     2.00 | RED    -> RED    | NO_ACTION | BYPASSED| CorridorWorker-02 | 6s
+11     | EV-201   | INT-01   |     1.80 | RED    -> GREEN  | TRIGGERED | SUCCESS| CorridorWorker-03 | 5s
+12     | EV-201   | INT-02   |     1.80 | RED    -> GREEN  | NO_ACTION | BYPASSED| CorridorWorker-04 | 2s
+13     | EV-201   | INT-03   |     1.80 | RED    -> GREEN  | TRIGGERED | SUCCESS| CorridorWorker-01 | 6s
+14     | EV-201   | INT-04   |     1.80 | RED    -> GREEN  | NO_ACTION | BYPASSED| CorridorWorker-02 | 2s
+15     | EV-201   | INT-05   |     1.80 | RED    -> GREEN  | TRIGGERED | SUCCESS| CorridorWorker-03 | 5s
+16     | EV-201   | INT-06   |     1.80 | RED    -> GREEN  | NO_ACTION | BYPASSED| CorridorWorker-04 | 2s
+17     | EV-202   | INT-01   |     3.50 | RED    -> RED    | NO_ACTION | BYPASSED| CorridorWorker-01 | 10s
+18     | EV-202   | INT-02   |     3.50 | RED    -> RED    | NO_ACTION | BYPASSED| CorridorWorker-02 | 8s
+19     | EV-301   | INT-01   |     1.20 | RED    -> GREEN  | TRIGGERED | SUCCESS| CorridorWorker-03 | 5s
+20     | EV-301   | INT-02   |     1.20 | RED    -> GREEN  | NO_ACTION | BYPASSED| CorridorWorker-04 | 2s
+21     | EV-301   | INT-03   |     1.20 | RED    -> GREEN  | TRIGGERED | SUCCESS| CorridorWorker-01 | 6s
+22     | EV-301   | INT-04   |     1.20 | RED    -> GREEN  | NO_ACTION | BYPASSED| CorridorWorker-02 | 2s
+23     | EV-301   | INT-05   |     1.20 | RED    -> GREEN  | TRIGGERED | SUCCESS| CorridorWorker-03 | 5s
+24     | EV-301   | INT-06   |     1.20 | RED    -> GREEN  | NO_ACTION | BYPASSED| CorridorWorker-04 | 2s
+25     | EV-302   | INT-01   |     2.50 | RED    -> RED    | NO_ACTION | BYPASSED| CorridorWorker-01 | 10s
+26     | EV-302   | INT-02   |     2.50 | RED    -> RED    | NO_ACTION | BYPASSED| CorridorWorker-02 | 8s
+--------------------------------------------------------------------------------------------------
+Total logged events: 26
+==========================================================================================
