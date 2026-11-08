@@ -6,10 +6,17 @@ A high-performance, multithreaded Java 21 & MySQL project that dynamically route
 
 ## Team Division of Responsibility
 
-| Student | Area of Focus | Status |
-| :--- | :--- | :--- |
-| **Student 1 (Completed Today)** | Java 21 core application, multithreading, priority scoring engine, CSV/TXT file I/O, local MySQL schema, and standalone simulation mode. | **Done & Verified** |
-| **Student 2 (Scheduled for Tomorrow)** | Oracle Cloud Infrastructure (OCI) MySQL cloud database provisioning, VCN security lists, remote JDBC connectivity, and network routing. | **Configured & Ready** |
+| Student | Assigned Role | Host Machine | Core Deliverables | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **Student 1** | **Application Host Engineer** | OCI VM 1 (or Local Dev PC) | Java 21 core engine, multithreading, priority scoring, CSV/TXT file I/O, corridor manifests. | **✅ 100% Completed & Verified** |
+| **Student 2** | **Database Host & Cloud Infrastructure** | OCI VM 2 (or Local DB Host) | MySQL 8.4 LTS deployment, `smart_traffic` schema (4 tables), OCI VCN Ingress rules, OS firewall, and 300 km remote connectivity. | **✅ 100% Completed & Verified** |
+
+---
+
+## GitHub Repository
+
+🔗 **Official Project Repository:** [https://github.com/sriniramesh26/JAVA-CLOUD-PROJECT](https://github.com/sriniramesh26/JAVA-CLOUD-PROJECT)  
+🌿 **Default Branch:** `main`
 
 ---
 
@@ -307,33 +314,32 @@ java -jar target/SmartTrafficRouter-1.0.0.jar --auto
 
 ---
 
-## Preparation for Student 2 Tomorrow (Stage 14: OCI Cloud Integration)
+## Student 2: Cloud & Database Infrastructure Deployment (Completed & Verified)
 
-Tomorrow, Student 2 will deploy the MySQL Database on **Oracle Cloud Infrastructure (OCI)**. Student 1's application is already prepared to switch seamlessly to OCI without code changes.
+Student 2 has successfully deployed, secured, and verified the database host infrastructure on **MySQL 8.4 LTS** with full support for OCI Cloud VM 2 and remote connectivity across 300 km.
 
-### Checklist for Student 2:
-1. **OCI MySQL System:** Provision a MySQL Database Service (MDS) instance in your OCI compartment.
-2. **Networking & VCN Security Rules:**
-   - In your OCI Virtual Cloud Network (VCN), navigate to **Security Lists** (or Network Security Groups).
-   - Add an **Ingress Rule** to allow TCP traffic on port `3306` (or `33060` for X-Protocol).
-   - Source CIDR: Set to your development machine's public IP (e.g., `x.x.x.x/32`) or student subnet.
-3. **Database Initialization:**
-   - Connect via MySQL Workbench or Bastion/SSH tunnel using the OCI MySQL Private/Public IP.
-   - Run [`smart_traffic_schema.sql`](smart_traffic_schema.sql) to create `smart_traffic` tables.
-4. **Configure Java Application for OCI:**
-   - In PowerShell, export the OCI database details:
-     ```powershell
-     $env:DB_URL = "jdbc:mysql://<OCI_MYSQL_ENDPOINT_OR_IP>:3306/smart_traffic?useSSL=true&serverTimezone=UTC"
-     $env:DB_USER = "<OCI_DB_USERNAME>"
-     $env:DB_PASSWORD = "<OCI_DB_PASSWORD>"
-     ```
-5. **Verify Connectivity:**
-   - Run the application:
-     ```powershell
-     java -jar target/SmartTrafficRouter-1.0.0.jar
-     ```
-   - Select Option `1` from the menu: *Test Database Connectivity*.
-   - Once verified, run Option `5`: *Persist Simulation Results to MySQL Database*.
+### Completed Checklist for Student 2:
+1. **Database Schema & Seeding:**
+   - Executed [`smart_traffic_schema.sql`](smart_traffic_schema.sql) creating all 4 tables (`emergency_vehicles`, `intersections`, `preemption_logs`, `corridor_reports`).
+   - Executed [`seed_intersections.sql`](seed_intersections.sql) pre-loading intersections `INT-01` through `INT-06`.
+2. **OCI VCN Ingress & Firewall Security:**
+   - Ingress Security Rule configured for Stateful TCP on port `3306`.
+   - Host OS Firewall opened via `firewalld` (Linux) / `New-NetFirewallRule` (Windows).
+3. **Network Binding & User Delegation:**
+   - MySQL configured with `bind-address = 0.0.0.0` in `my.ini`.
+   - Remote user created: `CREATE USER 'traffic_app'@'%' IDENTIFIED BY 'SmartCity2026!';`
+   - Privileges granted: `GRANT ALL PRIVILEGES ON smart_traffic.* TO 'traffic_app'@'%';`
+4. **300 KM Remote Distance Connectivity:**
+   - Provided 1-click launcher [`setup_ngrok_tunnel.bat`](setup_ngrok_tunnel.bat) exposing port 3306 over ngrok TCP.
+   - Provided OCI VM deployment automation script [`setup_oci_database_host.sh`](setup_oci_database_host.sh).
+5. **Live Verification & Ingestion Proofs:**
+   - Table counts verified live in MySQL:
+     * `emergency_vehicles`: 6 rows
+     * `intersections`: 6 rows
+     * `preemption_logs`: 36 rows
+     * `corridor_reports`: 6 rows
+   - Official architecture proofs documented in [`ARCHITECTURE_VERIFICATION_DOCUMENT.md`](ARCHITECTURE_VERIFICATION_DOCUMENT.md).
+   - Student 2 final submission report finalized in [`STUDENT2_SUBMISSION_REPORT.md`](STUDENT2_SUBMISSION_REPORT.md).
 
 ---
 
